@@ -1,0 +1,151 @@
+use DTPulse;
+
+DROP TABLE Payments;
+DROP TABLE Wishlist;
+DROP TABLE Cart;
+DROP TABLE Products;
+DROP TABLE Categories;
+DROP TABLE Users;
+DROP TABLE Roles;
+
+
+CREATE TABLE Roles (
+    roleId INT PRIMARY KEY IDENTITY(1,1),
+    roleName VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Users (
+    userId INT PRIMARY KEY IDENTITY(1,1),
+    firstName VARCHAR(100) NOT NULL,
+    lastName VARCHAR(100) NOT NULL,
+    username VARCHAR(100) UNIQUE NOT NULL,
+    email VARCHAR(250) UNIQUE NOT NULL,
+    phoneNumber VARCHAR(100) UNIQUE NOT NULL,
+    userPassword NVARCHAR(60) NOT NULL,
+    roleId INT NOT NULL,
+    FOREIGN KEY (roleId) REFERENCES Roles(roleId)
+);
+
+CREATE TABLE Categories (
+    categoryId INT PRIMARY KEY IDENTITY(1,1),
+    categoryName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Products (
+    productId INT PRIMARY KEY IDENTITY(1,1),
+    productName VARCHAR(150) UNIQUE NOT NULL,
+    productDescription VARCHAR(MAX) NOT NULL,
+    productPrice DECIMAL NOT NULL,
+    productStockQuantity INT NOT NULL,
+    productImageUrl VARCHAR(MAX) NOT NULL,
+    categoryId INT NOT NULL,
+    FOREIGN KEY (categoryId) REFERENCES Categories(categoryId)
+);
+
+CREATE TABLE Cart (
+    cartItemId INT PRIMARY KEY IDENTITY(1,1),
+    userId INT NOT NULL,
+    productId INT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(userId),
+    FOREIGN KEY (productId) REFERENCES Products(productId)
+);
+
+CREATE TABLE Wishlist (
+    wishlistItemId INT PRIMARY KEY IDENTITY(1,1),
+    userId INT NOT NULL,
+    productId INT NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Users(userId),
+    FOREIGN KEY (productId) REFERENCES Products(productId)
+);
+
+CREATE TABLE Payments (
+    paymentId INT PRIMARY KEY IDENTITY(1,1),
+    amount decimal not null,
+    userId int not null,       
+    paymentDate DATETIME2(5) DEFAULT GETDATE(),
+    FOREIGN KEY (userId) REFERENCES Users(userId)
+);
+
+CREATE TABLE JWTTokenBlacklist(
+    jwtId INT PRIMARY KEY IDENTITY(1,1),
+    jwtValue VARCHAR(MAX) NOT NULL
+);
+
+insert into Users(firstName, lastName, username, email, phoneNumber, userPassword) values ('Admin', 'Admin', 'admin123', 'admin123@gmail.com', '+38344000000', '
+
+insert into Roles(roleName) values ('ROLE_USER'), ('ROLE_ADMIN');
+insert into Categories(categoryName) values ('Computer'), ('Laptop'), ('Smartphone'),('Components'), ('Accessories')
+
+insert into Products(productName, productDescription, productPrice, productStockQuantity, productImageUrl, categoryId) values
+('Computer1', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Computer1.jpg', 1),
+('Laptop1', 'DescriptionDescription', 400.00, 10, 
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Laptop1.jpg', 2),
+('Smartphone1', 'DescriptionDescription', 400.00, 0,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Smartphone1.jpg', 3),
+('Component1', 'DescriptionDescription', 500.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Component1.jpg', 4),
+('Accessories1', 'DescriptionDescription', 1000.00, 20,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Accessories1.jpg', 5),
+('Computer2', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Computer2.jpg', 1),
+('Laptop2', 'DescriptionDescription', 150.00, 20,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Laptop2.jpg', 2),
+('Smartphone2', 'DescriptionDescription', 400.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Smartphone2.jpg', 3),
+('Component2', 'DescriptionDescription', 500.00, 20,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Component2.jpg', 4),
+('Accessories2', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Accessories2.jpg', 5),
+('Computer3', 'DescriptionDescription', 400.00, 0,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Computer3.jpg', 1),
+('Laptop3', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Laptop3.jpg', 2),
+('Smartphone3', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Smartphone3.jpg', 3),
+('Component3', 'DescriptionDescription', 1000.00, 0,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Component3.jpg', 4),
+('Accessories3', 'DescriptionDescription', 1000.00, 20,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Accessories3.jpg', 5),
+('Computer4', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Computer4.jpg', 1),
+('Laptop4', 'DescriptionDescription', 400.00, 0,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Laptop4.jpg', 2),
+('Smartphone4', 'DescriptionDescription', 500.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Smartphone4.jpg', 3),
+('Component4', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Component4.jpg', 4),
+('Accessories4', 'DescriptionDescription', 400.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Accessories4.jpg', 5),
+('Computer5', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Computer5.jpg', 1),
+('Laptop5', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Laptop5.jpg', 2),
+('Smartphone5', 'DescriptionDescription', 400.00, 20,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Smartphone5.jpg', 3),
+('Component5', 'DescriptionDescription', 500.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Component5.jpg', 4),
+('Accessories5', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Accessories5.jpg', 5),
+('Computer6', 'DescriptionDescription', 150.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Computer6.jpg', 1),
+('Laptop6', 'DescriptionDescription', 400.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Laptop6.jpg', 2),
+('Smartphone6', 'DescriptionDescription', 1000.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Smartphone6.jpg', 3),
+('Component6', 'DescriptionDescription', 150.00, 32,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Component6.jpg', 4),
+('Accessories6', 'DescriptionDescription', 400.00, 20,
+'C:\Users\HP\Desktop\AAB\Viti 3\Semestri 1\Projket\Kodi\front-end\dtpulse-front-end\src\assets\images\Accessories6.jpg', 5)
+
+
+
+
+
+
+
+
+
+
+
+

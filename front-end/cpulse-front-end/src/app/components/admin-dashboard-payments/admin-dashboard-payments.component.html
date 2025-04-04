@@ -1,0 +1,23 @@
+<div id="payemnts">
+    <div id="table-container">
+    <button routerLink="/admin-dashboard" id="backButton">Back</button>
+    <br>
+    <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>User Email</th>
+                    <th>Amount</th>
+                    <th>Date of Purchase</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let payment of this.payments">
+                    <td>{{payment.email}}</td>
+                    <td>{{payment.amount | currency: 'USD'}}</td>
+                    <td>{{this.formatDate(payment.paymentDate!)}}</td>
+                </tr>                
+            </tbody>
+        </table>    
+    </div>
+</div>

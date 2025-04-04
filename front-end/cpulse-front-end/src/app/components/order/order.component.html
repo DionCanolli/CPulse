@@ -1,0 +1,182 @@
+<header id="menu-header">
+    <div id="logo-div">
+        <h2 (click)="viewProducts()" style="color:white">CPulse</h2>
+    </div>
+    <button class="hiddenButtons" (click)="toggleHiddenMenu()" style="color: black;">Menu</button>
+
+    <div id="menu-buttons-div">
+        <button class="shown-header-buttons" id="menu-products-btn"(click)="viewProducts()">Products</button>
+    </div>
+</header>
+
+<nav id="hiddenMenu">
+    <button class="close-btn" (click)="toggleHiddenMenu()">✖</button>
+    <ul>
+        <li>Welcome {{username}}</li>
+        <li (click)="viewProfile()">Products</li>
+    </ul>
+</nav>
+
+<div id="cart">
+    <div id="cart-info">
+        <h2>Total Price: {{totalPrice | currency: 'USD'}}</h2>
+        <hr>
+        <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+            <!-- Card Number -->
+            <div class="form-group">
+              <label for="firstName">Card Number:</label>
+              <input type="text" id="firstName" formControlName="cardNumber" />
+    
+              <div style="display: flex; flex-direction: column;">
+                <small *ngIf="paymentForm.get('cardNumber')?.errors?.['required'] && paymentForm.get('cardNumber')?.touched">
+                    Card Number is required.
+                </small>
+                <small *ngIf="paymentForm.get('cardNumber')?.errors?.['minlength'] && paymentForm.get('cardNumber')?.touched">
+                    Card Number must be 16 characters long.
+                </small>
+              </div>
+            </div><br>
+
+            <!-- Card Holder Name -->
+            <div class="form-group">
+                <label for="firstName">Card Holder Name:</label>
+                <input type="text" id="cardHolderName" formControlName="cardHolderName" />
+      
+                <div style="display: flex; flex-direction: column;">
+                  <small *ngIf="paymentForm.get('cardHolderName')?.errors?.['required'] && paymentForm.get('cardHolderName')?.touched">
+                      Card Holder Name is required.
+                  </small>
+                  <small *ngIf="paymentForm.get('cardHolderName')?.errors?.['minlength'] && paymentForm.get('cardHolderName')?.touched">
+                      Card Holder Name must be more than 5 characters long.
+                  </small>
+                </div>
+            </div><br>
+
+            <!-- User Email -->
+            <div class="form-group" *ngIf="isUserAuthenticated === 0 && isAdminAuthenticated === 0">
+                <label for="firstName">Email Address:</label>
+                <input type="text" id="userEmail" formControlName="userEmail" />
+            
+                <div style="display: flex; flex-direction: column;">
+                    <small *ngIf="paymentForm.get('userEmail')?.errors?.['required'] && paymentForm.get('userEmail')?.touched">
+                        User Email is required.
+                    </small>
+                    <small *ngIf="paymentForm.get('userEmail')?.errors?.['email'] && paymentForm.get('userEmail')?.touched">
+                        Must be email
+                    </small>
+                </div>
+            </div>
+          
+            <!-- Expiry Month -->
+            <div class="form-group">
+                <label for="firstName">Expiry Month:</label>
+                <input type="text" id="firstName" formControlName="expiryMonth" />
+      
+                <div style="display: flex; flex-direction: column;">
+                  <small *ngIf="paymentForm.get('expiryMonth')?.errors?.['required'] && paymentForm.get('expiryMonth')?.touched">
+                      Expiry Month is required.
+                  </small>
+                </div>
+            </div><br>
+    
+            <!-- Expiry Year -->
+            <div class="form-group">
+                <label for="firstName">Expiry Year:</label>
+                <input type="text" id="firstName" formControlName="expiryYear" />
+      
+                <div style="display: flex; flex-direction: column;">
+                  <small *ngIf="paymentForm.get('expiryYear')?.errors?.['required'] && paymentForm.get('expiryYear')?.touched">
+                      Expiry Year is required.
+                  </small>
+                </div>
+            </div><br>
+
+            <!-- CVV -->
+            <div class="form-group">
+                <label for="firstName">CVV:</label>
+                <input type="text" id="firstName" formControlName="cvv" />
+      
+                <div style="display: flex; flex-direction: column;">
+                  <small *ngIf="paymentForm.get('cvv')?.errors?.['required'] && paymentForm.get('cvv')?.touched">
+                      Expiry Month is required.
+                  </small>
+                  <small *ngIf="paymentForm.get('cvv')?.errors?.['minlength'] && paymentForm.get('cvv')?.touched">
+                      CVV must be at least 3 characters long.
+                  </small>
+                </div>
+            </div>
+
+            <!-- Billing Address -->
+            <div class="form-group">
+                <label for="firstName">Billing Address:</label>
+                <input type="text" id="billingAddress" formControlName="billingAddress" />
+      
+                <div style="display: flex; flex-direction: column;">
+                  <small *ngIf="paymentForm.get('billingAddress')?.errors?.['required'] && paymentForm.get('billingAddress')?.touched">
+                      Billing Address is required.
+                  </small>
+                  <small *ngIf="paymentForm.get('billingAddress')?.errors?.['minlength'] && paymentForm.get('billingAddress')?.touched">
+                      Billing Address must be at least 10 characters long.
+                  </small>
+                </div>
+            </div>
+          
+            <!-- Zip Code -->
+            <div class="form-group">
+                <label for="firstName">Zip Code:</label>
+                <input type="text" id="firstName" formControlName="zipCode" />
+
+                <div style="display: flex; flex-direction: column;">
+                <small *ngIf="paymentForm.get('zipCode')?.errors?.['required'] && paymentForm.get('zipCode')?.touched">
+                    Zip Code is required.
+                </small>
+                <small *ngIf="paymentForm.get('zipCode')?.errors?.['minlength'] && paymentForm.get('zipCode')?.touched">
+                    Zip must be at least 5 characters long.
+                </small>
+                </div>
+            </div>
+
+            <!-- Country -->
+            <div class="form-group">
+                <label for="firstName">Country:</label>
+                <select formControlName="country" id="country">
+                    <option value="">-- Select a Country --</option>
+                    <option *ngFor="let country of countries" [value]="country">
+                      {{ country }}
+                    </option>
+                </select>
+
+                <div style="display: flex; flex-direction: column;">
+                    <small *ngIf="paymentForm.get('country')?.errors?.['required'] && paymentForm.get('country')?.touched">
+                        Country is required.
+                    </small>
+                </div>
+            </div>
+
+            <br>
+            <br>
+            <div style="display: flex; justify-content: space-evenly; gap: 10px;">   
+                <button type="submit" id="signupButton" [disabled]="paymentForm.invalid">Buy</button>
+                <button style="background-color: #007bff" routerLink="/products">Go to all Products</button>
+            </div>
+          </form>
+    </div>
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Category</th>
+                    <th>Product Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of this.products">
+                    <td>{{product.productName}}</td>
+                    <td>{{product.productCategory}}</td>
+                    <td>{{product.productPrice | currency: 'USD'}}</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>

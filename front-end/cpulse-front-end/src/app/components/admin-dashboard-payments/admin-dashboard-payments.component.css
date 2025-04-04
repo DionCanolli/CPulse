@@ -1,0 +1,77 @@
+#payemnts{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#table-container table {   
+    border-collapse: collapse; 
+}
+
+#table-container table th, #table-container table td {
+    border: 1px solid #000;
+    padding: 20px;
+    text-align: center;
+    white-space: nowrap;    
+}
+
+#table-container table th {
+    background-color: #2A49D5; 
+    color: white;
+}
+
+.remove-btn {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1024px){
+    #table-container table {
+        max-width: 400px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 660px){
+    #table-container {
+        width: 90%;  /* Adjust the width as needed */
+        overflow-x: auto;  /* Enable horizontal scrolling */
+        border: 1px solid #000;
+    }
+    #table-container table{
+        min-width: 600px;
+    }
+    #table-container {
+        overflow-x: auto;          
+        margin: 0 auto;             
+    }
+}
+
+#backButton {
+    background-color: #1b94c4; 
+    color: white; 
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;  
+    font-size: 16px;  
+    font-weight: bold; 
+    cursor: pointer; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    transition: all 0.3s ease;  
+}
+  
+#backButton:hover {
+    background-color: #72b7d7;  
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);  
+}
+
+
+

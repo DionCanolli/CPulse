@@ -1,0 +1,24 @@
+# Ignore everything by default
+*
+
+# Allow back-end and front-end folders
+!back-end/
+!front-end/
+!Database/
+
+# Ignore specific files or subfolders inside allowed directories if necessary
+back-end/logs/
+back-end/temp/
+front-end/node_modules/
+front-end/dist/
+
+# Ignore system and editor files
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Ignore IDE-specific folders
+.idea/
+.vscode/
+*.iml

@@ -1,0 +1,28 @@
+<div id="edit-user-admin-users">
+    <div id="user-info">
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of this.users">
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.phoneNumber}}</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+    <br>
+    <br>
+    <button routerLink="/admin-dashboard" id="backButton">Back</button>
+</div>

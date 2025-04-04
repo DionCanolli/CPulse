@@ -1,0 +1,676 @@
+{
+	"info": {
+		"_postman_id": "ee8189e3-d445-4597-9834-1d02f0be2a22",
+		"name": "DTPulse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "22113564"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Dion\",\r\n    \"lastName\": \"Canolli\",\r\n    \"username\": \"dioncanolli1\",\r\n    \"email\": \"dioncanolli1@gmail.com\",\r\n    \"phoneNumber\": \"+38330404731\",\r\n    \"password\": \"dioncanolli\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "localhost:8080/permitted/users/signup"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"dioncanolli05@gmail.com\",\r\n    \"password\": \"DionCanolli123\"\r\n}\r\n// {\r\n//     \"email\": \"admin123@gmail.com\",\r\n//     \"password\": \"admin123\"\r\n// }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{url}}/permitted/users/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": "{{url}}/users/logout"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authenticated Requests",
+			"item": [
+				{
+					"name": "Users",
+					"item": [
+						{
+							"name": "Find All Users (Admin)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/admin/users/all"
+							},
+							"response": []
+						},
+						{
+							"name": "Find my User Data",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/users/one"
+							},
+							"response": []
+						},
+						{
+							"name": "Verify User",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/users/verify"
+							},
+							"response": []
+						},
+						{
+							"name": "Verify Admin",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/admin/verify"
+							},
+							"response": []
+						},
+						{
+							"name": "Update User (Admin & User)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "// Emailen nuk mun e ndryshon\r\n{\r\n    \"firstName\": \"dioncanolli123\",\r\n    \"lastName\": \"canolliiii\",\r\n    \"username\": \"dionidionidioni\",\r\n    \"email\": \"dioncanolli1@gmail.com\",\r\n    \"phoneNumber\": \"+484848484\",\r\n    \"password\": \"dioncanolli\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/users/update"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/users/delete"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Add Product (Admin)",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "productDTO",
+											"value": "{\n  \"productName\": \"productName6\",\n  \"productDescription\": \"productDescription\",\n  \"productCategory\": \"Laptop\",\n  \"productPrice\": 10.0,\n  \"productStockQuantity\": 10,\n  \"productImageUrl\": \"C:\\\\Users\\\\HP\\\\Desktop\\\\AAB\\\\Viti 3\\\\Semestri 1\\\\Projket\\\\Kodi\\\\front-end\\\\dtpulse-front-end\\\\src\\\\assets\\\\images\"\n}",
+											"contentType": "application/json",
+											"type": "text"
+										},
+										{
+											"key": "productImage",
+											"contentType": "multipart/form-data",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": "{{url}}/admin/products/insert"
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product (Admin)",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/admin/products/update?productName=productName&quantity=quantity",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										"update"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "productName"
+										},
+										{
+											"key": "quantity",
+											"value": "quantity"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product (Admin)",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/products/delete?productName=productName1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"products",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "productName1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Wishlist",
+					"item": [
+						{
+							"name": "Find All User Wishlist Products",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/wishlist/user"
+							},
+							"response": []
+						},
+						{
+							"name": "Save Product in Wishlist",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{url}}/wishlist/insert?productName=Computer3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wishlist",
+										"insert"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "Computer3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product from User Wishlist",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/wishlist/delete?productName=productName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wishlist",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "productName"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Wishlist Item Exists",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/wishlist/item/exists?productName=productName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"wishlist",
+										"item",
+										"exists"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "productName"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Get all User Cart Products",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/cart/user"
+							},
+							"response": []
+						},
+						{
+							"name": "User Cart Item Exists",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/cart/item/exists?productName=productName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cart",
+										"item",
+										"exists"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "productName"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Insert Product in Cart",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/cart/insert?productName=productName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cart",
+										"insert"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "productName"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product from Cart",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/cart/delete?productName=productName",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"cart",
+										"delete"
+									],
+									"query": [
+										{
+											"key": "productName",
+											"value": "productName"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete All User Cart Items",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/cart/delete/all"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Payments",
+					"item": [
+						{
+							"name": "Find All User Payments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/payments/find"
+							},
+							"response": []
+						},
+						{
+							"name": "Find All Payments (Admin)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"url": "{{url}}/admin/payments/find/all"
+							},
+							"response": []
+						},
+						{
+							"name": "Process Payment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "{{jwtToken}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardNumber\": \"4242424242424242\",\r\n    \"expiryMonth\": \"12\",\r\n    \"expiryYear\": \"25\",\r\n    \"cvv\": \"123\",\r\n    \"amount\": 1003.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{url}}/payments/process"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Permitted Requests",
+			"item": [
+				{
+					"name": "Products",
+					"item": [
+						{
+							"name": "Find Product/s (Paginated)",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/permitted/products/find?categoryName=categoryName&productName=productName&page=2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"permitted",
+										"products",
+										"find"
+									],
+									"query": [
+										{
+											"key": "categoryName",
+											"value": "categoryName"
+										},
+										{
+											"key": "productName",
+											"value": "productName"
+										},
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find All Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/permitted/products/all"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "Find All Categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{url}}/permitted/categories/all"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

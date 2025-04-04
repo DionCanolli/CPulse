@@ -1,0 +1,79 @@
+    <header id="menu-header">
+        <div id="logo-div">
+            <h2 (click)="viewProducts()" style="color: white;">CPulse</h2>
+        </div>
+        <button class="hiddenButtons" (click)="toggleHiddenMenu()" style="color: black;">Menu</button>
+
+        <div id="menu-buttons-div">
+            <button class="shown-header-buttons" id="menu-profile-btn"
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="viewProfile()">Profile</button>
+            <button class="shown-header-buttons" id="menu-wishlist-btn"
+                (click)="viewWishlist()">Wishlist</button>
+            <button class="shown-header-buttons" id="menu-products-btn"
+                (click)="viewProducts()">Products</button>
+            <button class="shown-header-buttons" id="menu-orders-btn" 
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="viewOrders()">Orders</button>
+            <button class="shown-header-buttons" id="menu-cart-btn"
+                *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="viewCart()">Cart</button>
+            <button class="shown-header-buttons" id="menu-signup-btn"
+                *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0"
+                (click)="viewSignup()">Signup</button>
+            <button class="shown-header-buttons" id="menu-login-btn"
+            *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0"
+                (click)="viewLogin()">Login</button>
+            <button class="shown-header-buttons" id="menu-logout-btn" 
+                *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="logout()">Logout</button>
+        </div>
+    </header>
+
+    <nav id="hiddenMenu">
+        <button class="close-btn" (click)="toggleHiddenMenu()">✖</button>
+        <ul>
+            <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="viewProfile()">Profile</li>
+            <li (click)="viewWishlist()">Wishlist</li>
+            <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="viewOrders()">Orders</li>
+            <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="viewCart()">Cart</li>
+            <li *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0"
+                (click)="viewSignup()">Signup</li>
+            <li *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0"
+                (click)="viewLogin()">Login</li>
+            <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+                (click)="logout()">Logout</li>
+        </ul>
+    </nav>
+
+    <section id="productDetails">
+        <div class="productImage">
+            <img id="img" [src]="'assets/images/' + product?.productImageUrl" alt="{{ product?.productImageUrl }}">
+        </div>
+        <div id="productInfo">
+            <div>
+                <h2>{{product!.productName}}</h2>
+                <h3>Category: {{product!.productCategory}}</h3>
+                <h3>Price: {{product!.productPrice | currency: 'USD'}}</h3>
+                <p><strong>Description:</strong> {{product!.productDescription}} </p>
+                <h3><strong>Stock:</strong> {{product!.productStockQuantity}}</h3>
+            </div>
+
+            <br>
+            <br>
+
+            <div id="actionButtons">
+                <button class="detailsButton" id="buyButton" *ngIf="product!.productStockQuantity! > 0"
+                    (click)="goToOrder()">Buy</button>
+                <button class="detailsButton" id="addToCartButton" 
+                        *ngIf="product!.productStockQuantity! > 0 && !productExistsInCartList &&
+                               (isUserAuthenticated == 1 || isAdminAuthenticated == 1)"
+                        (click)="insertProductIntoCart(product!.productName!)">Add to Cart</button>
+                <button class="detailsButton" id="addToWishlistButton" (click)="insertProductIntoWishlist()"
+                 *ngIf="!productExistsInWishlistList">Add to Wishlist</button>
+            </div>
+        </div>
+    </section>

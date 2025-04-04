@@ -1,0 +1,75 @@
+<header id="menu-header">
+    <div id="logo-div">
+        <h2 (click)="viewProducts()" style="color: white">CPulse</h2>
+    </div>
+    <button class="hiddenButtons" (click)="toggleHiddenMenu()" style="color: black;">Menu</button>
+
+    <div id="menu-buttons-div">
+        <button class="shown-header-buttons" id="menu-profile-btn"
+        *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewProfile()">Profile</button>
+        <button class="shown-header-buttons" id="menu-products-btn"
+            (click)="viewProducts()">Products</button>
+        <button class="shown-header-buttons" id="menu-orders-btn" 
+        *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewOrders()">Orders</button>
+        <button class="shown-header-buttons" id="menu-cart-btn"
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewCart()">Cart</button>    
+        <button class="shown-header-buttons" id="menu-signup-btn"
+            *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0"
+            (click)="viewSignup()">Signup</button>
+        <button class="shown-header-buttons" id="menu-login-btn"
+            *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0"
+            (click)="viewLogin()">Login</button>
+        <button class="shown-header-buttons" id="menu-logout-btn" 
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="logout()">Logout</button>
+    </div>
+</header>
+
+<nav id="hiddenMenu">
+    <button class="close-btn" (click)="toggleHiddenMenu()">✖</button>
+    <ul>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1">Welcome {{username}}</li>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewProfile()">Profile</li>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewOrders()">Orders</li>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewCart()">Cart</li>
+        <li *ngIf="!isAdminAuthenticated && !isUserAuthenticated" 
+            (click)="viewSignup()">Signup</li>
+        <li *ngIf="!isAdminAuthenticated && !isUserAuthenticated" 
+            (click)="viewLogin()">Login</li>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="logout()">Logout</li>
+    </ul>
+</nav>
+
+<div id="wishlist">
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Category</th>
+                    <th>Product Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of this.products">
+                    <td>{{product.productName}}</td>
+                    <td>{{product.productCategory}}</td>
+                    <td>{{product.productPrice | currency: 'USD'}}</td>
+                    <td>
+                        <button class="remove-btn" (click)="deleteWishlistItem(product.productName!)">
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>

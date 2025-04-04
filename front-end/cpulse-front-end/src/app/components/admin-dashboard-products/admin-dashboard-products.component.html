@@ -1,0 +1,131 @@
+<div id="add-edit-product-admin-products">
+    <div id="new-product-info">
+        <h2>Add Product</h2>
+        <br>
+        <form id="product-form"  [formGroup]="productForm" (ngSubmit)="addProduct()">
+            <div class="form-group">
+                <label for="">Product Name:</label>
+                <input type="text" name="product-name" id="product-name" formControlName="productName">
+
+                <div style="display: flex; flex-direction: column;">
+                    <small *ngIf="productForm.get('productName')?.errors?.['required'] && productForm.get('productName')?.touched">
+                        Product name is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">Product Description:</label>
+                <input type="text" name="product-description" id="product-description" formControlName="productDescription">
+
+                <div style="display: flex; flex-direction: column;">
+                    <small *ngIf="productForm.get('productDescription')?.errors?.['required'] && productForm.get('productDescription')?.touched">
+                       Product description is required.
+                    </small>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="">Product Category:</label>
+                <select id="categories" name="categories" formControlName="productCategory">
+                    <option value="computer">Computer</option>
+                    <option value="computer">Laptop</option>
+                    <option value="computer">Smartphone</option>
+                    <option value="computer">Components</option>
+                    <option value="computer">Accessories</option>
+                </select>
+
+                <div style="display: flex; flex-direction: column;">
+                    <small *ngIf="productForm.get('productCategory')?.errors?.['required'] && productForm.get('productCategory')?.touched">
+                        Product Category is required.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">Product Price:</label>
+                <input type="text" name="product-price" id="product-price" formControlName="productPrice">
+
+                <div style="display: flex; flex-direction: column;">
+                    <small *ngIf="productForm.get('productPrice')?.errors?.['required'] && productForm.get('productPrice')?.touched">
+                        Product Price is required.
+                    </small>
+                    <small *ngIf="productForm.get('productPrice')?.errors?.['min'] && productForm.get('productPrice')?.touched">
+                        Product Price must not be lower than 0.01.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="">Quantity:</label>
+                <input type="number" name="product-quantity" id="product-quantity" formControlName="productStockQuantity">
+            
+                <div style="display: flex; flex-direction: column;">
+                    <small *ngIf="productForm.get('productStockQuantity')?.errors?.['required'] && productForm.get('productStockQuantity')?.touched">
+                        Product quantity is required.
+                    </small>
+                    <small *ngIf="productForm.get('productStockQuantity')?.errors?.['min']">
+                        Product quantity must not be less than 0.
+                    </small>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="product-image">Image:</label>
+                <input type="file" name="product-image" id="product-image" (change)="onFileSelected($event)" required />
+                <small *ngIf="productForm.get('productImage')?.errors?.['required'] && productForm.get('productImage')?.touched">
+                  Product image is required.
+                </small>
+            </div>
+
+            <br>
+            <br>
+            <div style="display: flex; justify-content: space-evenly;">                    
+                <button type="submit" id="addButton">Add</button>
+            </div>
+        </form>
+
+        <br><br>---------------------------<br><br>
+
+        <h2>Edit Product</h2>
+        <div id="addQuantity" style="display: flex; flex-direction: column;">
+            <Label>Product Name: </Label>
+            <input type="text" #editedProductName required>
+            <Label>Quantity: </Label>
+            <input type="number" min="1" #quantity required>
+            <button (click)="modifyProduct(editedProductName.value, +quantity.value)">Edit Quantity</button>
+        </div>
+
+    </div>
+    <br>
+    <div id="table-container">
+
+    <button routerLink="/admin-dashboard" id="backButton">Back</button>
+    <br>
+    <br>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Product Category</th>
+                    <th>Product Price</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of this.products">
+                    <td>{{product.productName}}</td>
+                    <td>{{product.productCategory}}</td>
+                    <td>{{product.productPrice | currency: 'USD'}}</td>
+                    <td>{{product.productStockQuantity}}</td>
+                    <td>
+                        <button class="remove-btn" (click)="deleteProduct(product.productName!)">Remove</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>
+<br><br>

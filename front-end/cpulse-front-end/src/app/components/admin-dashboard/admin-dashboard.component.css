@@ -1,0 +1,53 @@
+#adminButtons{
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+#productsButton{
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+#usersButton{
+    background-color: rgb(0, 255, 34);
+    font-weight: bold;
+    font-size: x-large;
+    color: white;
+    padding: 10px 20px;
+}
+
+#paymentsButton{
+    font-weight: bold;
+    background-color: rgb(25, 0, 255);
+    font-size: x-large;
+    color: white;
+    padding: 10px 20px;
+}
+
+@media (max-width: 510px){
+    #productsButton, #usersButton, #paymentsButton{
+        padding: 5px 10px;
+        font-size: medium;
+    }
+}
+
+@media (max-width: 510px){
+    #productsButton, #usersButton, #paymentsButton{
+        padding: 5px 10px;
+        font-size: smaller;
+    }
+}
+
+#logoutButton{
+    font-weight: bold;
+    background-color: rgb(238, 255, 0);
+    font-size: x-large;
+    color: white;
+    padding: 10px 20px;
+}

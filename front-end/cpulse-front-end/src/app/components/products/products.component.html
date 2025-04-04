@@ -1,0 +1,109 @@
+<header id="menu-header">
+    <div id="logo-div">
+        <h2 (click)="viewProducts()" style="color: white">CPulse</h2>
+    </div>
+    <div id="search-div">
+        <input type="text" id="menu-search-input"  #searchInput>
+        <button class="shown-header-buttons" id="menu-search-btn"
+        (click)="listAllProducts(null, searchInput.value, 1)">Search</button>
+    </div>
+    <button class="hiddenButtons" (click)="toggleHiddenMenu()" style="color: black;">Menu</button>
+    <button class="hiddenButtons" (click)="toggleCategoryMenu()" style="color: black;">Categories</button>
+
+    <div id="menu-buttons-div">
+        <button class="shown-header-buttons" id="menu-profile-btn"
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewProfile()">Profile</button>
+        <button class="shown-header-buttons" id="menu-wishlist-btn"
+            (click)="viewWishlist()">Wishlist</button>
+        <button class="shown-header-buttons" id="menu-orders-btn" 
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewOrders()">Orders</button>
+        <button class="shown-header-buttons" id="menu-cart-btn"
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewCart()">Cart</button>
+        <button class="shown-header-buttons" id="menu-signup-btn" 
+            *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0" 
+            (click)="viewSignup()">Signup</button>
+        <button class="shown-header-buttons" id="menu-login-btn" 
+            *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0" 
+            (click)="viewLogin()">Login</button>
+        <button class="shown-header-buttons" id="menu-logout-btn" 
+            *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="logout()">Logout</button>
+    </div>
+</header>
+
+<div id="categories">
+    <button class="categories-buttons" (click)="listAllProducts('All', null, 1)">All</button>
+    <button class="categories-buttons" (click)="listAllProducts('Computer', null, 1)">Computer</button>
+    <button class="categories-buttons" (click)="listAllProducts('Laptop', null, 1)">Laptop</button>
+    <button class="categories-buttons" (click)="listAllProducts('Smartphone', null, 1)">Smartphone</button>
+    <button class="categories-buttons" (click)="listAllProducts('Components', null, 1)">Components</button>
+    <button class="categories-buttons" (click)="listAllProducts('Accessories', null, 1)">Accessories</button>
+</div>
+
+<div id="hidden-search-div">
+    <input type="text" id="hidden-menu-search-input">
+    <button class="hidden-shown-header-buttons" id="hidden-menu-search-btn">Search</button>
+</div>
+
+<nav id="hiddenMenu">
+    <button class="close-btn" (click)="toggleHiddenMenu()">✖</button>
+    <ul>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewProfile()">Profile</li>
+        <li (click)="viewWishlist()">Wishlist</li>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewOrders()">Orders</li>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="viewCart()">Cart</li>
+        <li *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0"
+            (click)="viewLogin()">Login</li>
+        <li *ngIf="isAdminAuthenticated == 0 && isUserAuthenticated == 0" 
+            (click)="viewSignup()">Signup</li>
+        <li *ngIf="isAdminAuthenticated == 1 || isUserAuthenticated == 1"
+            (click)="logout()">Logout</li>
+    </ul>
+</nav>
+
+<nav id="categoryMenu">
+    <button class="close-btn" (click)="toggleCategoryMenu()">✖</button>
+    <ul>
+        <li (click)="listAllProducts('All', null, 1)">All</li>
+        <li (click)="listAllProducts('Computer', null, 1)">Computer</li>
+        <li (click)="listAllProducts('Laptop', null, 1)">Laptop</li>
+        <li (click)="listAllProducts('Smartphone', null, 1)">Smartphone</li>
+        <li (click)="listAllProducts('Components', null, 1)">Components</li>
+        <li (click)="listAllProducts('Accessories', null, 1)">Accessories</li>
+    </ul>
+</nav>
+
+<section id="productSection">
+    <div class="productCard" *ngFor="let product of products">
+        <div class="productImage">
+            <img [src]="'assets/images/' + product.productImageUrl" alt="{{ product.productImageUrl }}">
+        </div>
+    
+        <h3>{{product.productName}}</h3>
+        <h5>Category: {{product.productCategory}}</h5>
+        <h5>Price: {{product.productPrice | currency: 'USD'}}</h5>
+        <h5>Stock: {{product.productStockQuantity}}</h5>
+        <br>
+        <button (click)="viewProduct(product.productName)" class="viewProductButton">View</button>
+    </div>
+</section>
+
+<section id="footer">
+    <div id="paginationPart">
+        <ngb-pagination
+            [(page)]="pageNumber"
+            [pageSize]="20"
+            [collectionSize]="nrProductsReturned!"
+            (pageChange)="listAllProducts(categoryName, productName, pageNumber)"
+            [maxSize]="20"
+            >
+        </ngb-pagination>
+    </div>
+    <p>Copyright (C) All rights reserved</p>
+</section>

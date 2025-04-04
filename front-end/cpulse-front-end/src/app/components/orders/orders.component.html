@@ -1,0 +1,45 @@
+<header id="menu-header">
+    <div id="logo-div">
+        <h2 (click)="viewProducts()" style="color:white">CPulse</h2>
+    </div>
+    <button class="hiddenButtons" (click)="toggleHiddenMenu()" style="color: black;">Menu</button>
+
+    <div id="menu-buttons-div">
+        <button class="shown-header-buttons" id="menu-profile-btn" (click)="viewProfile()">Profile</button>
+        <button class="shown-header-buttons" id="menu-products-btn"(click)="viewProducts()">Products</button>
+        <button class="shown-header-buttons" id="menu-wishlist-btn" (click)="viewWishlist()">Wishlist</button>    
+        <button class="shown-header-buttons" id="menu-cart-btn" (click)="viewCart()">Cart</button>    
+        <button class="shown-header-buttons" id="menu-logout-btn" (click)="logout()">Logout</button>
+    </div>
+</header>
+
+<nav id="hiddenMenu">
+    <button class="close-btn" (click)="toggleHiddenMenu()">✖</button>
+    <ul>
+        <li>Welcome {{username}}</li>
+        <li (click)="viewProfile()">Profile</li>
+        <li (click)="viewProfile()">Products</li>
+        <li (click)="viewWishlist()">Wishlist</li>
+        <li (click)="viewCart()">Cart</li>
+        <li (click)="logout()">Logout</li>
+    </ul>
+</nav>
+
+<div id="orders">
+    <div id="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Total Price</th>
+                    <th>Date Of Purchase</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of this.orders">
+                    <td>{{order.amount | currency: 'USD'}}</td>
+                    <td>{{ formatDate(order.paymentDate!) }}</td>
+                </tr>
+            </tbody>
+        </table>    
+    </div>
+</div>

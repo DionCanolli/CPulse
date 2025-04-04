@@ -1,0 +1,195 @@
+
+#add-edit-product-admin-products{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+}
+
+#table-container table {   
+    border-collapse: collapse; 
+}
+
+#table-container table th, #table-container table td {
+    border: 1px solid #000;
+    padding: 20px;
+    text-align: center;
+    white-space: nowrap;        /* Prevent column content from wrapping */
+}
+
+#table-container table th {
+    background-color: #2A49D5;  /* Dark Blue Header */
+    color: white;
+}
+
+.remove-btn {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.remove-btn:hover {
+    text-decoration: underline;
+}
+
+#new-product-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#new-product-info button{
+    background-color: #4CAF50; 
+    border: none; 
+    color: white; 
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+#new-product-info button:hover {
+    background-color: #45a049; 
+}
+
+#product-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 10px;
+}
+
+.form-group input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus {
+    border-color: #2A49D5;  /* Highlight color on focus */
+    box-shadow: 0 0 5px rgba(42, 73, 213, 0.3);
+}
+
+@media (max-width: 1270px){
+    #table-container table {
+        font-size: 10px;
+    }
+    #new-product-info, #new-product-info button{
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 1024px){
+    #table-container table {
+        max-width: 400px;
+    }
+    #add-edit-product-admin-products{
+        margin-top: 20px;
+        gap: 50px;
+    }
+    #add-edit-product-admin-products{
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 660px){
+    #table-container {
+        width: 90%;  /* Adjust the width as needed */
+        overflow-x: auto;  /* Enable horizontal scrolling */
+        border: 1px solid #000;
+    }
+    #table-container table{
+        min-width: 600px;
+    }
+    #table-container {
+        overflow-x: auto;          
+        margin: 0 auto;             
+    }
+}
+
+select {
+    width: 46%;
+    padding: 10px 15px;
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    font-size: 1em;
+    outline: none;
+    appearance: none;  /* Removes default arrow (for some browsers) */
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Custom arrow */
+select {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='blue' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'><path d='M7 7l3-3 3 3z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+select:focus {
+    border-color: #0056b3;
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.25);
+}
+
+/* Optional: Hover effect */
+select:hover {
+    border-color: #0056b3;
+}
+
+#addQuantity input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#addQuantity input:focus {
+    border-color: #2A49D5;  /* Highlight color on focus */
+    box-shadow: 0 0 5px rgba(42, 73, 213, 0.3);
+}
+
+#backButton{
+
+}
+
+#backButton{
+    background-color: #4c77af; 
+    border: none; 
+    color: white; 
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 16px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+#backButton:hover {
+    background-color: #455da0; 
+}

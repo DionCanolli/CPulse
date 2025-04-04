@@ -1,0 +1,24 @@
+Educational Use Only License
+
+License Summary
+This license allows users to view, study, and use this project solely for educational and personal learning purposes. Commercial, redistribution, or derivative use is prohibited without explicit permission from the author.
+
+License Text
+DTPulse License - Educational Use Only
+
+1. License Grant
+The author ("Licensor") grants a non-exclusive, non-transferable, limited license to use this project for personal educational purposes only. This license allows the Licensee to:
+    View and study the code for personal learning.
+    Use the project in educational settings (such as classrooms or workshops), provided it remains non-commercial.
+
+2. Restrictions
+    No Commercial Use: This project may not be used, in whole or part, for any commercial purposes.
+    No Distribution: This project or any modified version cannot be distributed, published, or shared outside of personal educational use.
+    No Modification or Derivative Works: Modifying or creating derivative works from this project for redistribution is prohibited.
+    No Integration into Other Projects: This project cannot be incorporated into other software, products, or systems.
+
+3. Disclaimer of Warranty
+This project is provided "as is," without warranties or guarantees of any kind. The Licensor is not liable for any issues arising from use of this project.
+
+4. Termination
+Any violation of these terms results in immediate termination of this license, and the Licensee must delete all copies of the project.
